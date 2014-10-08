@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:mb="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    tools:context=".ReportActivity">
+
+    <LinearLayout
+        android:layout_above="@+id/basic_services"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/photo"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/map"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ProgressBar
+                android:id="@+id/map_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_above="@+id/action_button"
+        android:id="@+id/basic_services"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="@dimen/bottom_sheet_min_height">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/action_button"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <com.keith.mb.MaterialButton
+            mb:text="@string/submit_ok"
+            mb:text_color="@android:color/black"
+            mb:color_normal="@android:color/background_light"
+            mb:color_ripple="@color/button_ripple"
+            mb:color_shadow="@color/button_shadow"
+            mb:corner_radius="0dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp" />
+
+        <com.keith.mb.MaterialButton
+            mb:text="@string/submit_cancel"
+            mb:text_color="@android:color/black"
+            mb:color_normal="@android:color/background_light"
+            mb:color_ripple="@color/button_ripple"
+            mb:color_shadow="@color/button_shadow"
+            mb:corner_radius="0dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp" />
+    </LinearLayout>
+</RelativeLayout>

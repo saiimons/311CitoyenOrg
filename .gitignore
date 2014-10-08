@@ -116,3 +116,8 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+
+#######################################
+## PRIVATE FILES CONTAINING API KEYS ##
+#######################################
+app/src/main/res/values/private.xml

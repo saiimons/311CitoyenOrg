@@ -1,0 +1,2 @@
+include ':app', ':MaterialButton'
+project(':MaterialButton').projectDir = new File('MaterialButton/library')
