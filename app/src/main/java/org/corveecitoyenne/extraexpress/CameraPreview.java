@@ -71,7 +71,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // empty. Take care of releasing the Camera preview in your activity.
         if (mCamera != null) {
             mCamera.stopPreview();
-            mCamera.release();
         }
     }
 

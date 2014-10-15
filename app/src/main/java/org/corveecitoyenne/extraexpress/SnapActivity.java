@@ -1,7 +1,7 @@
 package org.corveecitoyenne.extraexpress;
 
 import android.app.Activity;
-import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.ImageFormat;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
@@ -17,12 +17,11 @@ import com.keith.mb.MaterialButton;
 import java.util.List;
 
 
-public class ReportActivity extends Activity implements SubmitFragment.OnFragmentInteractionListener {
-    private static final String TAG = ReportActivity.class.getSimpleName();
+public class SnapActivity extends Activity {
+    private static final String TAG = SnapActivity.class.getSimpleName();
     private Camera mCamera;
     private MaterialButton mFlashButton, mSnapButton;
     private CameraPreview mCameraPreview;
-    private SubmitFragment mSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class ReportActivity extends Activity implements SubmitFragment.OnFragmen
         size.width = 0;
         size.height = 0;
         for (Camera.Size zeSize : sizes) {
-            if(zeSize.width <= 1920 && zeSize.width > size.width) {
+            if (zeSize.width <= 1920 && zeSize.width > size.width) {
                 size = zeSize;
             }
         }
@@ -108,10 +107,10 @@ public class ReportActivity extends Activity implements SubmitFragment.OnFragmen
                             }, new Camera.PictureCallback() {
                                 @Override
                                 public void onPictureTaken(byte[] data, Camera camera) {
-                                    mSubmit.setImageBytes(data);
-                                    mSubmit.getView().setVisibility(View.VISIBLE);
-                                    mSubmit.startLocationUpdate();
                                     mCamera.startPreview();
+                                    Intent i = new Intent(SnapActivity.this, SubmitActivity.class);
+                                    i.putExtra(SubmitActivity.EXTRA_PICTURE, data);
+                                    startActivity(i);
                                 }
                             });
                         }
@@ -120,8 +119,12 @@ public class ReportActivity extends Activity implements SubmitFragment.OnFragmen
 
             }
         });
-        mSubmit = (SubmitFragment) getFragmentManager().findFragmentById(R.id.submit_screen);
-        mSubmit.getView().setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCamera.release();
     }
 
     private void updateFlashButton() {
@@ -136,4 +139,5 @@ public class ReportActivity extends Activity implements SubmitFragment.OnFragmen
         }
         mFlashButton.setIcon(id);
     }
+
 }
