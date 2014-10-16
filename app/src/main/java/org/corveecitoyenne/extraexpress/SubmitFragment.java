@@ -1,6 +1,7 @@
 package org.corveecitoyenne.extraexpress;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -8,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.ByteArrayInputStream;
@@ -27,7 +28,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class SubmitFragment extends Fragment {
@@ -90,6 +93,9 @@ public class SubmitFragment extends Fragment {
                              Bundle savedInstanceState) {
         mRoot = inflater.inflate(R.layout.submit_picture, container, false);
         runImageTask();
+        mRoot.findViewById(R.id.mtl311).setOnClickListener(new EmailSubmitListener("311citoyen@gmail.com"));
+        mRoot.findViewById(R.id.mtlprk).setOnClickListener(new EmailSubmitListener("311citoyen@gmail.com"));
+        mRoot.findViewById(R.id.mtlstm).setOnClickListener(new EmailSubmitListener("311citoyen@gmail.com"));
         return mRoot;
     }
 
@@ -219,5 +225,32 @@ public class SubmitFragment extends Fragment {
         coord = (coord % 1) * 600000;             // .259258 * 60000 = 15555
         sOut = sOut + Integer.toString((int) coord) + "/10000";   // 105/1,59/1,15555/1000
         return sOut;
+    }
+
+    private class EmailSubmitListener implements View.OnClickListener {
+        private String mDest;
+
+        public EmailSubmitListener(String dest) {
+            mDest = dest;
+        }
+
+        @Override
+        public void onClick(View v) {
+            final Intent emailIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+            emailIntent.setType("message/rfc822");
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{mDest});
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Relevé de dégradation");
+            String mapsUrl = String.format(Locale.ENGLISH, "http://maps.google.com/maps?t=h&q=loc:%f,%f&z=17", mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            emailIntent.putExtra(Intent.EXTRA_TEXT, mapsUrl);
+            //has to be an ArrayList
+            ArrayList<Uri> uris = new ArrayList<Uri>();
+            //convert from paths to Android friendly Parcelable Uri's
+            File fileIn = new File(mPictureLocation);
+            Uri u = Uri.fromFile(fileIn);
+            uris.add(u);
+            emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+            getActivity().startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
+        }
     }
 }

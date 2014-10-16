@@ -26,6 +26,7 @@
         android:layout_height="122dp">
 
         <RelativeLayout
+            android:id="@+id/mtl311"
             android:padding="4dp"
             android:clickable="true"
             android:background="@drawable/selector_button"
@@ -49,6 +50,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/mtlstm"
             android:padding="4dp"
             android:clickable="true"
             android:background="@drawable/selector_button"
@@ -73,6 +75,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/mtlprk"
             android:padding="4dp"
             android:clickable="true"
             android:background="@drawable/selector_button"
