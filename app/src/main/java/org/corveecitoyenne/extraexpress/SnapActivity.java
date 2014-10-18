@@ -14,8 +14,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.keith.mb.MaterialButton;
-
 import java.util.List;
 
 
@@ -147,7 +145,7 @@ public class SnapActivity extends Activity {
         } else if (Camera.Parameters.FLASH_MODE_AUTO.equals(mode)) {
             id = R.drawable.flash_auto;
         }
-        ((ImageView)mFlashButton.getChildAt(0)).setImageResource(id);
+        ((ImageView) mFlashButton.getChildAt(0)).setImageResource(id);
     }
 
 }
