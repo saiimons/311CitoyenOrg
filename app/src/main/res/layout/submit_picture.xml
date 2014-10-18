@@ -96,7 +96,29 @@
                 android:layout_width="48dp"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/mtljccbi"
+            android:padding="4dp"
+            android:clickable="true"
+            android:background="@drawable/selector_button"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:src="@drawable/mtl_jccbi"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:layout_marginTop="56dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:text="@string/mtljccbi_name"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
         <RelativeLayout
             android:padding="4dp"
             android:clickable="true"

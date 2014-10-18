@@ -97,9 +97,10 @@ public class SubmitFragment extends Fragment {
                              Bundle savedInstanceState) {
         mRoot = inflater.inflate(R.layout.submit_picture, container, false);
         runImageTask();
-        mRoot.findViewById(R.id.mtl311).setOnClickListener(new EmailSubmitListener("311citoyen@gmail.com"));
+        mRoot.findViewById(R.id.mtl311).setOnClickListener(new EmailSubmitListener("311@montreal.qc.ca")); // TODO find an email address
         mRoot.findViewById(R.id.mtlprk).setOnClickListener(new EmailSubmitListener(getString(R.string.mtlprk_email)));
         mRoot.findViewById(R.id.mtlstm).setOnClickListener(new EmailSubmitListener(getString(R.string.mtlstm_email)));
+        mRoot.findViewById(R.id.mtljccbi).setOnClickListener(new EmailSubmitListener(getString(R.string.mtljccbi_email)));
         return mRoot;
     }
 
@@ -266,17 +267,9 @@ public class SubmitFragment extends Fragment {
             Uri u = Uri.fromFile(fileIn);
             uris.add(u);
             emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-            final PackageManager pm = getActivity().getPackageManager();
-            final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
-            ResolveInfo best = null;
-            for (final ResolveInfo info : matches)
-                if (info.activityInfo.packageName.endsWith(".gm") ||
-                        info.activityInfo.name.toLowerCase().contains("gmail")) best = info;
-            if (best != null){
-                emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
-            startActivity(emailIntent);} else{
-                getActivity().startActivity(Intent.createChooser(emailIntent, getString(R.string.email_client_choser_title)));
-            }
+            PrefsManager pm = new PrefsManager(getActivity());
+            emailIntent.setClassName(pm.getMailClientPkg(), pm.getMailClientName());
+            startActivity(emailIntent);
         }
     }
 }
