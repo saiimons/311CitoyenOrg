@@ -12,4 +12,10 @@
     <string name="picture_directory">311citoyen</string>
     <string name="default_mail_subject">Relevé de dégradation</string>
     <string name="email_client_choser_title">Envoi de courriel avec</string>
+    <string name="mtlprk_email">sac@statdemtl.qc.ca</string>
+    <string name="mtlstm_email">serge.leblanc@stm.info</string>
+    <string name="more">More</string>
+    <string name="mtlprk_name">Stationnement</string>
+    <string name="mtlstm_name">STM</string>
+    <string name="mtl311_name">311</string>
 </resources>

@@ -98,8 +98,8 @@ public class SubmitFragment extends Fragment {
         mRoot = inflater.inflate(R.layout.submit_picture, container, false);
         runImageTask();
         mRoot.findViewById(R.id.mtl311).setOnClickListener(new EmailSubmitListener("311citoyen@gmail.com"));
-        mRoot.findViewById(R.id.mtlprk).setOnClickListener(new EmailSubmitListener("311citoyen@gmail.com"));
-        mRoot.findViewById(R.id.mtlstm).setOnClickListener(new EmailSubmitListener("311citoyen@gmail.com"));
+        mRoot.findViewById(R.id.mtlprk).setOnClickListener(new EmailSubmitListener(getString(R.string.mtlprk_email)));
+        mRoot.findViewById(R.id.mtlstm).setOnClickListener(new EmailSubmitListener(getString(R.string.mtlstm_email)));
         return mRoot;
     }
 

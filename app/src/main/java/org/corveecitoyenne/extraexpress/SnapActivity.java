@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.keith.mb.MaterialButton;
 
@@ -20,7 +22,7 @@ import java.util.List;
 public class SnapActivity extends Activity {
     private static final String TAG = SnapActivity.class.getSimpleName();
     private Camera mCamera;
-    private MaterialButton mFlashButton, mSnapButton;
+    private RelativeLayout mFlashButton, mSnapButton;
     private CameraPreview mCameraPreview;
     private Camera.PictureCallback mJpegCallback;
     private Camera.AutoFocusCallback mFocusCallback;
@@ -35,8 +37,8 @@ public class SnapActivity extends Activity {
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         mCameraPreview = (CameraPreview) findViewById(R.id.camera_preview);
-        mFlashButton = (MaterialButton) findViewById(R.id.flash_button);
-        mSnapButton = (MaterialButton) findViewById(R.id.snap_button);
+        mFlashButton = (RelativeLayout) findViewById(R.id.flash_button);
+        mSnapButton = (RelativeLayout) findViewById(R.id.snap_button);
         mCamera = Camera.open();
         mCamera.setDisplayOrientation(90);
         Camera.Parameters params = mCamera.getParameters();
@@ -145,7 +147,7 @@ public class SnapActivity extends Activity {
         } else if (Camera.Parameters.FLASH_MODE_AUTO.equals(mode)) {
             id = R.drawable.flash_auto;
         }
-        mFlashButton.setIcon(id);
+        ((ImageView)mFlashButton.getChildAt(0)).setImageResource(id);
     }
 
 }

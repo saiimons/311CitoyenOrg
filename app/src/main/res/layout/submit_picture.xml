@@ -44,7 +44,7 @@
                 android:layout_marginTop="56dp"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:text="311"
+                android:text="@string/mtl311_name"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -62,14 +62,13 @@
             <ImageView
                 android:src="@drawable/mtl_stm"
                 android:layout_width="48dp"
-                android:layout_weight="1"
                 android:layout_height="48dp" />
 
             <TextView
                 android:textAlignment="center"
                 android:layout_marginTop="56dp"
                 android:gravity="center"
-                android:text="STM"
+                android:text="@string/mtlstm_name"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -87,14 +86,13 @@
             <ImageView
                 android:src="@drawable/stationnement"
                 android:layout_width="48dp"
-                android:layout_weight="1"
                 android:layout_height="48dp" />
 
             <TextView
                 android:textAlignment="center"
                 android:layout_marginTop="56dp"
                 android:gravity="center"
-                android:text="Stationnement"
+                android:text="@string/mtlprk_name"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -117,7 +115,7 @@
                 android:layout_marginTop="56dp"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:text="More"
+                android:text="@string/more"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content" />
         </RelativeLayout>

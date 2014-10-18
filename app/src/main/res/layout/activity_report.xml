@@ -10,72 +10,92 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_alignParentBottom="true"
         android:background="#7FCCCCCC"
-        android:paddingRight="@dimen/bottom_sheet_lateral_padding"
-        android:paddingLeft="@dimen/bottom_sheet_lateral_padding"
-        android:paddingTop="@dimen/bottom_sheet_top_padding"
-        android:paddingBottom="@dimen/bottom_sheet_bottom_padding"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_sheet_min_height"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal"
+        android:layout_height="122dp">
 
-        <com.keith.mb.MaterialButton
-            android:id="@+id/snap_button"
-            mb:icon="@drawable/snap"
-            mb:color_normal="@color/button_normal"
-            mb:color_ripple="@color/button_ripple"
-            mb:color_shadow="@color/button_shadow"
-            android:layout_centerHorizontal="true"
-            mb:corner_radius="48dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
-
-        <TextView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:layout_below="@+id/snap_button"
-            android:text="@string/snap" />
-
-        <com.keith.mb.MaterialButton
+        <RelativeLayout
             android:id="@+id/flash_button"
-            mb:icon="@drawable/flash_on"
-            mb:color_normal="@color/button_normal"
-            mb:color_ripple="@color/button_ripple"
-            mb:color_shadow="@color/button_shadow"
-            mb:corner_radius="48dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
+            android:padding="4dp"
+            android:clickable="true"
+            android:background="@drawable/selector_button"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_below="@+id/snap_button"
-            android:text="@string/flash" />
+            <ImageView
+                android:layout_margin="12dp"
+                android:src="@drawable/flash_auto"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
 
-        <com.keith.mb.MaterialButton
-            mb:icon="@drawable/gallery"
-            mb:color_normal="@color/button_normal"
-            mb:color_ripple="@color/button_ripple"
-            mb:color_shadow="@color/button_shadow"
-            mb:corner_radius="48dp"
-            android:layout_width="48dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_height="48dp" />
+            <TextView
+                android:layout_marginTop="56dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:text="@string/flash"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
-        <TextView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:layout_below="@+id/snap_button"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:text="@string/gallery" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/snap_button"
+            android:padding="4dp"
+            android:clickable="true"
+            android:background="@drawable/selector_button"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_margin="12dp"
+                android:src="@drawable/snap"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <TextView
+                android:textAlignment="center"
+                android:layout_marginTop="56dp"
+                android:gravity="center"
+                android:text="@string/snap"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/gallery_button"
+            android:padding="4dp"
+            android:clickable="true"
+            android:background="@drawable/selector_button"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_margin="12dp"
+                android:src="@drawable/gallery"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <TextView
+                android:textAlignment="center"
+                android:layout_marginTop="56dp"
+                android:gravity="center"
+                android:text="@string/gallery"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
