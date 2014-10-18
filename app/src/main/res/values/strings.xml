@@ -18,6 +18,6 @@
     <string name="mtlprk_name">Stationnement</string>
     <string name="mtlstm_name">STM</string>
     <string name="mtl311_name">311</string>
-    <string name="mtljccbi_name">JCCBI</string>
+    <string name="mtljccbi_name">PJCCI</string>
     <string name="mtljccbi_email">communications@pjcci.ca</string>
 </resources>
