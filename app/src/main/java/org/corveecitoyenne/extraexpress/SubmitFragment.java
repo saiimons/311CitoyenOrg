@@ -121,7 +121,7 @@ public class SubmitFragment extends Fragment {
                         matrix,
                         true);
                 File file = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), "311citoyen");
+                        Environment.DIRECTORY_PICTURES), getResources().getString(R.string.picture_directory));
                 if (!file.mkdirs()) {
                     Log.e(TAG, "Directory not created");
                 }
@@ -256,7 +256,7 @@ public class SubmitFragment extends Fragment {
             final Intent emailIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
             emailIntent.setType("message/rfc822");
             emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{mDest});
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Relevé de dégradation");
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.default_mail_subject));
             String mapsUrl = String.format(Locale.ENGLISH, "http://maps.google.com/maps?t=h&q=loc:%f,%f&z=17", mLastLocation.getLatitude(), mLastLocation.getLongitude());
             emailIntent.putExtra(Intent.EXTRA_TEXT, mapsUrl);
             //has to be an ArrayList
@@ -275,7 +275,7 @@ public class SubmitFragment extends Fragment {
             if (best != null){
                 emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
             startActivity(emailIntent);} else{
-                getActivity().startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                getActivity().startActivity(Intent.createChooser(emailIntent, getString(R.string.email_client_choser_title)));
             }
         }
     }

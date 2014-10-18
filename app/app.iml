@@ -83,7 +83,6 @@
     <orderEntry type="library" exported="" name="picasso-2.3.4" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-5.2.08" level="project" />
-    <orderEntry type="library" exported="" name="flickrj-android-2.1.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-20.0.0" level="project" />
     <orderEntry type="module" module-name="MaterialButton" exported="" />
   </component>

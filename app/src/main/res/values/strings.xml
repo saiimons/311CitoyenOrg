@@ -9,5 +9,7 @@
     <string name="submit_ok">Valider</string>
     <string name="submit_cancel">Annuler</string>
     <string name="title_activity_submit">SubmitActivity</string>
-
+    <string name="picture_directory">311citoyen</string>
+    <string name="default_mail_subject">Relevé de dégradation</string>
+    <string name="email_client_choser_title">Envoi de courriel avec</string>
 </resources>
