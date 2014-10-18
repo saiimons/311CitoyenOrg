@@ -22,6 +22,8 @@ public class SnapActivity extends Activity {
     private Camera mCamera;
     private MaterialButton mFlashButton, mSnapButton;
     private CameraPreview mCameraPreview;
+    private Camera.PictureCallback mJpegCallback;
+    private Camera.AutoFocusCallback mFocusCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class SnapActivity extends Activity {
         size.width = 0;
         size.height = 0;
         for (Camera.Size zeSize : sizes) {
-            if (zeSize.width <= 1920 && zeSize.width > size.width) {
+            if (zeSize.width <= 640/*1920*/ && zeSize.width > size.width) {
                 size = zeSize;
             }
         }
@@ -76,6 +78,30 @@ public class SnapActivity extends Activity {
         mCamera.setParameters(params);
         mCameraPreview.setCamera(mCamera);
         updateFlashButton();
+        mFocusCallback = new Camera.AutoFocusCallback() {
+            @Override
+            public void onAutoFocus(boolean success, Camera camera) {
+                if (success) {
+                    Log.d(TAG, "AUTO-FOCUS");
+                    mCamera.takePicture(null, null /*new Camera.PictureCallback() {
+                                @Override
+                                public void onPictureTaken(byte[] data, Camera camera) {
+                                    Log.d(TAG, "RAW CALLBACK");
+                                }
+                            }*/, mJpegCallback);
+                }
+            }
+        };
+        mJpegCallback = new Camera.PictureCallback() {
+            @Override
+            public void onPictureTaken(byte[] data, Camera camera) {
+                mCamera.startPreview();
+                Log.d(TAG, "JPEG CALLBACK");
+                Intent i = new Intent(SnapActivity.this, SubmitActivity.class);
+                i.putExtra(SubmitActivity.EXTRA_PICTURE, data);
+                startActivity(i);
+            }
+        };
         mFlashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,29 +119,11 @@ public class SnapActivity extends Activity {
                 updateFlashButton();
             }
         });
+
         mSnapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCamera.autoFocus(new Camera.AutoFocusCallback() {
-                    @Override
-                    public void onAutoFocus(boolean success, Camera camera) {
-                        if (success) {
-                            mCamera.takePicture(null, new Camera.PictureCallback() {
-                                @Override
-                                public void onPictureTaken(byte[] data, Camera camera) {
-                                }
-                            }, new Camera.PictureCallback() {
-                                @Override
-                                public void onPictureTaken(byte[] data, Camera camera) {
-                                    mCamera.startPreview();
-                                    Intent i = new Intent(SnapActivity.this, SubmitActivity.class);
-                                    i.putExtra(SubmitActivity.EXTRA_PICTURE, data);
-                                    startActivity(i);
-                                }
-                            });
-                        }
-                    }
-                });
+                mCamera.autoFocus(mFocusCallback);
 
             }
         });

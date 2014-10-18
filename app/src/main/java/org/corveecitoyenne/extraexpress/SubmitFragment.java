@@ -2,11 +2,14 @@ package org.corveecitoyenne.extraexpress;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.Camera;
 import android.location.Location;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -30,6 +33,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -190,6 +194,7 @@ public class SubmitFragment extends Fragment {
 
 
         if (mLastLocation != null && mPictureLocation != null) {
+            Log.d(TAG, "Updating location");
             ExifInterface eif = null;
             try {
                 eif = new ExifInterface(mPictureLocation);
@@ -211,6 +216,18 @@ public class SubmitFragment extends Fragment {
                 eif.setAttribute(ExifInterface.TAG_GPS_TIMESTAMP, mGPSTimeStampFormat.format(mLastLocation.getTime()));
 
                 eif.saveAttributes();
+
+                File f = new File(mPictureLocation);
+                Uri contentUri = Uri.fromFile(f);
+                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                mediaScanIntent.setData(contentUri);
+                getActivity().sendBroadcast(mediaScanIntent);
+
+
+                Intent newPicture = new Intent(Camera.ACTION_NEW_PICTURE);
+                newPicture.setType("image/jpeg");
+                newPicture.setData(contentUri);
+                getActivity().sendBroadcast(newPicture);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -249,8 +266,17 @@ public class SubmitFragment extends Fragment {
             Uri u = Uri.fromFile(fileIn);
             uris.add(u);
             emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-            getActivity().startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
+            final PackageManager pm = getActivity().getPackageManager();
+            final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
+            ResolveInfo best = null;
+            for (final ResolveInfo info : matches)
+                if (info.activityInfo.packageName.endsWith(".gm") ||
+                        info.activityInfo.name.toLowerCase().contains("gmail")) best = info;
+            if (best != null){
+                emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+            startActivity(emailIntent);} else{
+                getActivity().startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            }
         }
     }
 }
